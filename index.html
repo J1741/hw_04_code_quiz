@@ -9,7 +9,46 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <h1>Coding Quiz Challenge</h1>
+    <!-- add quiz header -->
+    <header id="quiz-header">
+        <!-- TODO: Link to highscores page -->
+        <div>View Highscores</a></div>
+        <!-- TODO: Add timer -->
+        <!-- TODO/JS: Make span display time left -->
+        <div>Time <span>[NN]</span></div>
+    </header>
+    <!-- add main division for quiz page -->
+    <main id="quiz-main">
+      <!-- add section for quiz start -->
+      <section id="quiz-start">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        <!-- TODO/JS: TBD -->
+        <button>Start Quiz</button>
+      </section>
+      <!-- add section for quiz question -->
+      <section id="quiz-question">
+        <!-- TODO/JS: TBD -->
+        <h1>[Placeholder: Question text]</h1>
+        <!-- TODO/JS: TBD -->
+        <div>[Placeholder: Question choices]</div>
+      </section>
+      <!-- add section for quiz end -->
+      <section id="quiz-end">
+        <h1>All done!</h1>
+        <p>Your final score is <span>[NN]</span>.</p>
+        <form id="initials-form" method="POST">
+          <label for="initials-text">Enter initials: </label>
+          <input type="text" name="initials-text" id="initials-text">
+          <!-- TODO/JS: TBD -->
+          <button id="initials-submit">Submit</button>
+        </form>
+      </section>
+      <!-- add section for previous question status -->
+      <section id="previous-question-status">
+        <div>[Placeholder: Previous question status]</div>
+      </section>
+    </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="./js/script.js"></script> 
 </body>
