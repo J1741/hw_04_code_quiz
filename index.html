@@ -10,10 +10,11 @@
 </head>
 <body>
     <!-- add quiz header -->
-    <header id="quiz-header">
+    <!-- add bootstrap navbar styling -->
+    <header id="quiz-header" class="navbar navbar-dark bg-primary">
         <!-- add link to scores page -->
-        <div><a href="./html/highscores.html">View Highscores</a></div>
-        <div id="time">Time: 0</div>
+        <a id="view-highscores" href="./html/highscores.html" class="navbar-brand">View Highscores</a>
+        <div id="time" class="navbar-brand">Time: 0</div>
     </header>
     <!-- add main division for quiz page -->
     <main id="quiz-main-page">
@@ -21,7 +22,6 @@
       <section id="quiz-start-screen">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <!-- TODO/JS: TBD -->
         <button id="quiz-start-btn">Start Quiz</button>
       </section>
       <!-- add section for quiz question -->

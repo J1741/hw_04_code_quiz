@@ -25,7 +25,7 @@ var quizStartBtn = document.querySelector("#quiz-start-btn");
 // Listen for click on quiz start button
 quizStartBtn.addEventListener("click", 
 function setTime() {
-  // Sets interval in vraible 
+  // Sets interval in variable 
   var timerInterval = setInterval(function() {
 
     // Decrements seconds left
@@ -42,4 +42,5 @@ function setTime() {
     }
 
   }, 1000);
+  
 });
