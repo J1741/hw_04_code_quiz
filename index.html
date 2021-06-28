@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- add quiz header -->
-    <!-- add bootstrap navbar styling -->
+    <!-- add bootstrap navbar styling to header-->
     <header id="quiz-header" class="navbar navbar-dark bg-primary">
         <!-- add link to scores page -->
         <a id="view-highscores" href="./html/highscores.html" class="navbar-brand">View Highscores</a>
@@ -19,17 +19,24 @@
     <!-- add main division for quiz page -->
     <main id="quiz-main-page">
       <!-- add section for quiz start -->
-      <section id="quiz-start-screen">
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <button id="quiz-start-btn">Start Quiz</button>
+      <!-- add bootstrap layout and styling to start screen -->
+      <section id="quiz-start-screen" class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-lg-8 text-center ">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <form>
+              <button id="quiz-start-btn" class="btn btn-primary">Start Quiz</button>
+            </form>
+          </div>
+        </div>
       </section>
       <!-- add section for quiz question -->
       <section id="quiz-question-screen">
         <!-- TODO/JS: TBD -->
         <h1>[Placeholder: Question text]</h1>
         <!-- TODO/JS: TBD -->
-        <div>[Placeholder: Question choices]</div>
+        <div></div>
       </section>
       <!-- add section for quiz end -->
       <section id="quiz-end-screen">
