@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/index_style.css">
     <title>Code Quiz</title>
 </head>
 <body>
@@ -13,28 +13,26 @@
     <header id="quiz-header">
         <!-- add link to scores page -->
         <div><a href="./html/highscores.html">View Highscores</a></div>
-        <!-- TODO: Add timer -->
-        <!-- TODO/JS: Make span display time left -->
-        <div>Time <span>[NN]</span></div>
+        <div id="time">Time: 0</div>
     </header>
     <!-- add main division for quiz page -->
-    <main id="quiz-main">
+    <main id="quiz-main-page">
       <!-- add section for quiz start -->
-      <section id="quiz-start">
+      <section id="quiz-start-screen">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <!-- TODO/JS: TBD -->
-        <button>Start Quiz</button>
+        <button id="quiz-start-btn">Start Quiz</button>
       </section>
       <!-- add section for quiz question -->
-      <section id="quiz-question">
+      <section id="quiz-question-screen">
         <!-- TODO/JS: TBD -->
         <h1>[Placeholder: Question text]</h1>
         <!-- TODO/JS: TBD -->
         <div>[Placeholder: Question choices]</div>
       </section>
       <!-- add section for quiz end -->
-      <section id="quiz-end">
+      <section id="quiz-end-screen">
         <h1>All done!</h1>
         <p>Your final score is <span>[NN]</span>.</p>
         <form id="initials-form" method="POST">
@@ -45,11 +43,11 @@
         </form>
       </section>
       <!-- add section for previous question status -->
-      <section id="previous-question-status">
+      <section id="prev-question-status-screen">
         <div>[Placeholder: Previous question status]</div>
       </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="./js/script.js"></script> 
+    <script type="text/javascript" src="./js/index_script.js"></script> 
 </body>
 </html>
