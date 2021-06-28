@@ -1,7 +1,7 @@
 /* Table of Contents 
 
 1.0 Globals
-2.0 TESTING: Simple Timer
+2.0 Quiz Timer
 
 */
 
@@ -9,33 +9,37 @@
 /* 1.0 Globals */
 /***************/
 
-// select timer element by id
+// access timer element by id
 var timeEl = document.querySelector("#time");
 
 // set timer starting point
 var secondsLeft = 5;
 
-/*****************************/
-/* 2.0 TESTING: Simple Timer */
-/*****************************/
+// access start button by id
+var quizStartBtn = document.querySelector("#quiz-start-btn");
 
-// Sets up simple timer
-// Sets up timer interval, displays seconds left, stops timer at zero 
+/******************/
+/* 2.0 Quiz Timer */
+/******************/
+
+// Listen for click on quiz start button
+quizStartBtn.addEventListener("click", 
 function setTime() {
+  // Sets interval in vraible 
   var timerInterval = setInterval(function() {
+
+    // Decrements seconds left
     secondsLeft--;
+    // Displays seconds left
     timeEl.textContent = "Time: " + secondsLeft;
     console.log(secondsLeft);
 
-    // stop timer at zero seconds
+    // Stops timer at zero seconds
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
-      // log quiz over
+      // Logs quiz over
       console.log("Quiz over");
     }
 
   }, 1000);
-}
-
-// run simple timer
-setTime();
+});
