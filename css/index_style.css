@@ -14,18 +14,18 @@
 }
 
 /* TESTING: hide quiz question screen by default */
-/* #quiz-question-screen {
+#quiz-question-screen {
   display: none;
-} */
+}
 
 /* TESTING: hide quiz end screen by default */
-/* #quiz-end-screen {
+#quiz-end-screen {
   display: none;
-} */
+}
 
 #prev-question-status-screen {
   /* TESTING: hide previous question status by default */
-  /* display: none; */
+  display: none;
   color: #6c757d;
   font-size: 1.25rem;
   font-style: italic;
