@@ -1,3 +1,24 @@
+/* add left margin to view high scores link */
 #view-highscores {
   margin-left: 1rem;
 }
+
+/* make choice button with fit content */
+.choice-btn {
+  width: fit-content;
+}
+
+/* reduce height of question text */
+#question-text {
+  font-size: 1.5rem;
+}
+
+/* TESTING: hide quiz question screen by default */
+/* #quiz-question-screen {
+  display: none;
+} */
+
+/* TESTING: hide quiz end screen by default */
+/* #quiz-end-screen {
+  display: none;
+} */

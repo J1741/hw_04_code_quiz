@@ -9,13 +9,13 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <!-- add quiz header -->
+    <!-- add quiz nav -->
     <!-- add bootstrap navbar styling to header-->
-    <header id="quiz-header" class="navbar navbar-dark bg-primary">
+    <nav id="quiz-nav" class="navbar navbar-dark bg-primary">
         <!-- add link to scores page -->
         <a id="view-highscores" href="./html/highscores.html" class="navbar-brand">View Highscores</a>
         <div id="time" class="navbar-brand">Time: 0</div>
-    </header>
+    </nav>
     <!-- add main division for quiz page -->
     <main id="quiz-main-page">
       <!-- add section for quiz start -->
@@ -32,20 +32,25 @@
         </div>
       </section>
       <!-- add section for quiz question -->
-      <section id="quiz-question-screen">
-        <!-- TODO/JS: TBD -->
-        <h1>[Placeholder: Question text]</h1>
-        <!-- TODO/JS: TBD -->
-        <form>
-          <button choice-0eth-btn>Choice 0-eth</button>
-          <button choice-1eth-btn>Choice 1-eth</button>
-          <button choice-2eth-btn>Choice 2-eth</button>
-          <button choice-3eth-btn>Choice 3-eth</button>
-        </form>
+      <!-- add bootstrap layout and styling to question screen -->
+      <section id="quiz-question-screen" class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-lg-8 text-center"></div>
+            <!-- TODO/JS: TBD -->
+            <h2 id="question-text">[Placeholder: Question text]</h2>
+            <!-- TODO/JS: TBD -->
+            <form class="d-flex flex-column">
+              <button id="choice-0eth-btn" class="choice-btn my-1 py-0 btn btn-primary">Choice 0-eth</button>
+              <button id="choice-1eth-btn" class="choice-btn my-1 py-0 btn btn-primary">Choice 1-eth</button>
+              <button id="choice-2eth-btn" class="choice-btn my-1 py-0 btn btn-primary">Choice 2-eth</button>
+              <button id="choice-3eth-btn" class="choice-btn my-1 py-0 btn btn-primary">Choice 3-eth</button>
+            </form>
+          </div>
+        </div>
       </section>
       <!-- add section for quiz end -->
       <section id="quiz-end-screen">
-        <h1>All done!</h1>
+        <h2>All done!</h2>
         <p>Your final score is <span>[NN]</span>.</p>
         <form id="initials-form" method="POST">
           <label for="initials-text">Enter initials: </label>

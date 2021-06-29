@@ -26,19 +26,19 @@ console.log(quizStartBtn);
 var questions = [
 
   {
-    title: "question1",
+    title: "question0",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit:",
     choices: ["test1", "test2", "test3", "test4"],
     answer: "test1" 
   },
   {
-    title: "question2",
+    title: "question1",
     text: "Aenean vel iaculis ante, eu interdum mauris:",
     choices: ["test5", "test6", "test7", "test8"],
     answer: "test5"
   },
   {
-    title: "question3",
+    title: "question2",
     text: "Sed id erat et augue gravida rutrum:",
     choices: ["test9", "test10", "test11", "test12"],
     answer: "test9" 
@@ -78,4 +78,5 @@ function setTime(event) {
 
 };
 
+// add event listener for quiz start button
 quizStartBtn.addEventListener("click", setTime);
