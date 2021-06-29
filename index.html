@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- add quiz nav -->
-    <!-- add bootstrap navbar styling to header-->
+    <!-- add bootstrap navbar styling to nav-->
     <nav id="quiz-nav" class="navbar navbar-dark bg-primary">
         <!-- add link to scores page -->
         <a id="view-highscores" href="./html/highscores.html" class="navbar-brand">View Highscores</a>
@@ -49,12 +49,12 @@
         </div>
       </section>
       <!-- add section for quiz end -->
-      <!-- add bootstrap layout and styling to question screen -->
+      <!-- add bootstrap layout and styling to end screen -->
       <section id="quiz-end-screen" class="container my-5">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-10 col-lg-8">
             <h2>All done!</h2>
-            <p>Your final score is <span>[NN]</span>.</p>
+            <p id="final-score-text">[Placeholder: Your final score is NN]</p>
             <form id="initials-form" method="POST" class="d-flex flex-wrap">
               <label for="initials-text" class="me-2">Enter initials: </label>
               <input type="text" name="initials-text" id="initials-text" class="me-2">

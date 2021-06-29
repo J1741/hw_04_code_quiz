@@ -1,0 +1,12 @@
+/* outdent ordered list and set list style to none */
+ol {
+  margin-left: -35px;
+  list-style: none;
+}
+
+/* add spacing around list items */
+li {
+  background-color: #d9e7ff;
+  margin: 5px;
+  padding: 0px 5px 0px 5px;
+}
