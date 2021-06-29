@@ -23,7 +23,10 @@
   display: none;
 } */
 
-/* TESTING: hide previous question status by default */
-/* #quiz-end-screen {
-  display: none;
-} */
+#prev-question-status-screen {
+  /* TESTING: hide previous question status by default */
+  /* display: none; */
+  color: #6c757d;
+  font-size: 1.25rem;
+  font-style: italic;
+}
