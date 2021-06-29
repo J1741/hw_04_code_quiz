@@ -49,15 +49,20 @@
         </div>
       </section>
       <!-- add section for quiz end -->
-      <section id="quiz-end-screen">
-        <h2>All done!</h2>
-        <p>Your final score is <span>[NN]</span>.</p>
-        <form id="initials-form" method="POST">
-          <label for="initials-text">Enter initials: </label>
-          <input type="text" name="initials-text" id="initials-text">
-          <!-- TODO/JS: TBD -->
-          <button id="initials-submit">Submit</button>
-        </form>
+      <!-- add bootstrap layout and styling to question screen -->
+      <section id="quiz-end-screen" class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-lg-8">
+            <h2>All done!</h2>
+            <p>Your final score is <span>[NN]</span>.</p>
+            <form id="initials-form" method="POST" class="d-flex flex-wrap">
+              <label for="initials-text" class="me-2">Enter initials: </label>
+              <input type="text" name="initials-text" id="initials-text" class="me-2">
+              <!-- TODO/JS: TBD -->
+              <button id="initials-submit-btn" class="py-0 btn btn-primary me-2">Submit</button>
+            </form>
+          </div>
+        </div>
       </section>
       <!-- add section for previous question status -->
       <section id="prev-question-status-screen">
