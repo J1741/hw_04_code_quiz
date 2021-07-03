@@ -2,6 +2,7 @@
 
 1.0 Globals
 2.0 Quiz Timer
+3.0 Start Quiz
 
 */
 
@@ -11,18 +12,18 @@
 
 // access timer element by id
 var timeEl = document.querySelector("#time");
-console.log(timeEl);
-
 // set timer starting point
 var secondsLeft = 5;
-console.log(secondsLeft);
-
-// access start button by id
+// access quiz start button by id
 var quizStartBtn = document.querySelector("#quiz-start-btn");
 
-console.log(quizStartBtn);
+// access quiz start, question, end, and status screens
+var quizStartEl = document.querySelector("#quiz-start-screen");
+var quizQuestionEl = document.querySelector("#quiz-question-screen");
+var quizEndEl = document.querySelector("#quiz-end-screen");
+var quizPrevQuesStatusEl = document.querySelector("#prev-question-status-screen");
 
-// TESTING: add test questions
+// add test questions
 var questions = [
 
   {
@@ -52,20 +53,17 @@ console.log(questions);
 /* 2.0 Quiz Timer */
 /******************/
 
+// Start timer when when quiz start button is clicked
+function setTime() {
 
-// Listen for click on quiz start button
-function setTime(event) {
-  // prevent default
-  event.preventDefault();
-  console.log(event);
   // Sets interval in variable 
   var timerInterval = setInterval(function() {
 
-    // Decrements seconds left
+    // Decrements seconds left by 1
     secondsLeft--;
     // Displays seconds left
     timeEl.textContent = "Time: " + secondsLeft;
-    console.log(secondsLeft);
+    console.log("Time left: " + secondsLeft);
 
     // Stops timer at zero seconds
     if(secondsLeft === 0) {
@@ -78,5 +76,28 @@ function setTime(event) {
 
 };
 
-// add event listener for quiz start button
-quizStartBtn.addEventListener("click", setTime);
+/******************/
+/* 3.0 Start Quiz */
+/******************/
+
+// add event listeners for quiz start button
+quizStartBtn.addEventListener("click", startQuiz);
+
+// start quiz
+function startQuiz(event) {
+  // prevent default
+  event.preventDefault();
+  console.log(event);
+  console.log("in startQuiz!");
+
+  // start the timer
+  setTime();
+
+  // hide the quiz start screen
+  quizStartEl.style.display = "none";
+
+  // display the quiz question screen
+  quizQuestionEl.style.display = "block";
+
+  // display the content of the first question
+};
