@@ -14,6 +14,7 @@
 var timeEl = document.querySelector("#time");
 // set timer starting point
 var secondsLeft = 5;
+
 // access quiz start button by id
 var quizStartBtn = document.querySelector("#quiz-start-btn");
 
@@ -23,26 +24,46 @@ var quizQuestionEl = document.querySelector("#quiz-question-screen");
 var quizEndEl = document.querySelector("#quiz-end-screen");
 var quizPrevQuesStatusEl = document.querySelector("#prev-question-status-screen");
 
-// add test questions
+// access question components
+var questionTextEl = document.querySelector("#question-text");
+console.log(questionTextEl);
+var choice0Btn = document.querySelector("#choice-0eth-btn");
+var choice1Btn = document.querySelector("#choice-1eth-btn");
+var choice2Btn = document.querySelector("#choice-2eth-btn");
+var choice3Btn = document.querySelector("#choice-3eth-btn");
+
+// add quiz questions about JavaScript
 var questions = [
 
   {
-    title: "question0",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit:",
-    choices: ["test1", "test2", "test3", "test4"],
-    answer: "test1" 
-  },
-  {
     title: "question1",
-    text: "Aenean vel iaculis ante, eu interdum mauris:",
-    choices: ["test5", "test6", "test7", "test8"],
-    answer: "test5"
+    text: "Commonly used data types DO NOT include:",
+    choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+    answer: "3. alerts" 
   },
   {
     title: "question2",
-    text: "Sed id erat et augue gravida rutrum:",
-    choices: ["test9", "test10", "test11", "test12"],
-    answer: "test9" 
+    text: "The condition in an if / else statement is enclosed within:",
+    choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
+    answer: "3. parentheses"
+  },
+  {
+    title: "question3",
+    text: "Arrays in JavaScript can be used to store:",
+    choices: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"],
+    answer: "4. all of the above" 
+  },
+  {
+    title: "question4",
+    text: "String values must enclosed within ____ when being assigned to variables.",
+    choices: ["1. commas", "2. curly brackets", "3. quotes", "4. parentheses"],
+    answer: "3. quotes"
+  },
+  {
+    title: "question5",
+    text: "A very useful tool used during development and debugging for printing content to the debuggers is:",
+    choices: ["1. JavaScript", "2. terminal/bash", "3. for loops", "4. console log"],
+    answer: "4. console log" 
   }
 ];
 
@@ -99,5 +120,7 @@ function startQuiz(event) {
   // display the quiz question screen
   quizQuestionEl.style.display = "block";
 
-  // display the content of the first question
+  // TESTING: changing content of 0eth choice button
+  // choice0Btn.textContent = "HELLO THERE!"
+  
 };
