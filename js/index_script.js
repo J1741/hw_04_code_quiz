@@ -4,8 +4,9 @@
   * 3.0 TIMER 
   * 4.0 QUESTION DISPLAY 
   * 5.0 QUESTION SCORING 
-  * 6.0 RUN QUIZ
-  * 7.0 PSEUDOCODE and TESTING
+  * 6.0 START QUIZ
+  * 7.0 END QUIZ
+  * 8.0 PSEUDOCODE and TESTING
 **/
 
 
@@ -18,6 +19,7 @@ var currentQuestion = 0;
 var choice; 
 var answer;
 var previousQuestionStatus;
+var quizStatus;
 
 // access timer element by id
 var timeEl = document.querySelector("#time");
@@ -32,12 +34,15 @@ var quizQuestionEl = document.querySelector("#quiz-question-screen");
 var quizEndEl = document.querySelector("#quiz-end-screen");
 var quizPrevQuesStatusEl = document.querySelector("#prev-question-status-screen");
 
-// access question text and choice elements 
+// access question text, choice, and final score elements 
 var questionTextEl = document.querySelector("#question-text");
 var choice0Btn = document.querySelector("#choice-0eth-btn");
 var choice1Btn = document.querySelector("#choice-1eth-btn");
 var choice2Btn = document.querySelector("#choice-2eth-btn");
 var choice3Btn = document.querySelector("#choice-3eth-btn");
+/* TESTING */
+var finalScoreTextEl = document.querySelector("#final-score-text");
+console.log("final score text el: " + finalScoreTextEl);
 
 // add quiz questions about JavaScript
 var questions = [
@@ -76,15 +81,17 @@ var questions = [
 
 // log questions
 console.log(questions);
+console.log(questions.length);
+
 
 /*---------------------*/
 /* 2.0 EVENT LISTENERS */
 /*---------------------*/
 
-// add event listener for quiz start button
-quizStartBtn.addEventListener("click", runQuiz);
+// add event listener for quiz start button to start quiz
+quizStartBtn.addEventListener("click", startQuiz);
 
-// add event listeners for choice buttons
+// add event listeners for choice buttons to score choices
 choice0Btn.addEventListener("click", scoreChoice);
 choice1Btn.addEventListener("click", scoreChoice); 
 choice2Btn.addEventListener("click", scoreChoice);
@@ -96,6 +103,7 @@ choice3Btn.addEventListener("click", scoreChoice);
 /*-----------*/
 
 // creates timer that decreases by one second and stops at zero
+// this function is called when quiz is started
 function setTime() {
 
   // sets interval in variable 
@@ -107,12 +115,13 @@ function setTime() {
     timeEl.textContent = "Time: " + secondsLeft;
     console.log("Time left: " + secondsLeft);
 
-    // stops timer at zero seconds
-    if(secondsLeft === 0) {
+    // stops timer when seconds left are less than or equal to zero, OR all Qs answered (via "quizStatus")
+    if (secondsLeft <= 0 || quizStatus === "completed") {
       clearInterval(timerInterval);
-      // logs quiz over when timer reaches zero
-      console.log("Timer has hit zero");
-    }
+      console.log("Timer has hit zero or below, or all Qs answered");
+      // TESTING
+      endQuiz();
+    } 
 
   }, 1000);
 
@@ -123,25 +132,34 @@ function setTime() {
 /* 4.0 QUESTION DISPLAY */
 /*----------------------*/
 
-// displays current question
+// displays current question, when no questions left sets quiz status to  "completed" and calls ends quiz function
 function displayCurrentQuestion() {
-  questionTextEl.textContent = questions[currentQuestion].text;
-  choice0Btn.textContent = questions[currentQuestion].choices[0];
-  choice1Btn.textContent = questions[currentQuestion].choices[1];
-  choice2Btn.textContent = questions[currentQuestion].choices[2];
-  choice3Btn.textContent = questions[currentQuestion].choices[3];
+  if (currentQuestion < questions.length) {
+    console.log("----- there are Qs left -----");
+    questionTextEl.textContent = questions[currentQuestion].text;
+    choice0Btn.textContent = questions[currentQuestion].choices[0];
+    choice1Btn.textContent = questions[currentQuestion].choices[1];
+    choice2Btn.textContent = questions[currentQuestion].choices[2];
+    choice3Btn.textContent = questions[currentQuestion].choices[3];    
+  } else {
+    console.log("***** NO MORE Qs left *****");
+    quizStatus = "completed";
+    endQuiz();
+  }
+
 };
 
 // briefly displays previous question status
 function displayPreviousQuestionStatus() {
-  // unhide previous question status screen
+  // unhides previous question status screen
   quizPrevQuesStatusEl.style.display = "block";
-  // populate previous question status
+  // populates previous question status
   quizPrevQuesStatusEl.textContent = previousQuestionStatus;
-  // hide previous question status screen after 1.5 seconds
+  // hides previous question status screen after a couple seconds
   setTimeout(function() {
     quizPrevQuesStatusEl.style.display = "none"; 
-  }, 1500);
+  }, 2000);
+
 };
 
 
@@ -162,7 +180,7 @@ function scoreChoice (event) {
   answer = questions[currentQuestion].answer;
   console.log("answer is: " + answer);
 
-  // test whether choice is correct
+  // check whether choice is correct
   if (choice === answer) {
     // update previous question status
     previousQuestionStatus = "Correct!";
@@ -184,19 +202,19 @@ function scoreChoice (event) {
 
   // display next question after previous question answered
   displayCurrentQuestion();
+
 };
 
+
 /*------------------*/
-/* 6.0 RUNNING QUIZ */
+/* 6.0 START QUIZ */
 /*------------------*/
 
-// run quiz
-function runQuiz(event) {
+// start quiz
+function startQuiz(event) {
 
   // prevent default
   event.preventDefault();
-  // console.log(event);
-  // console.log("in runQuiz function!");
 
   // start the timer
   setTime();
@@ -212,8 +230,26 @@ function runQuiz(event) {
 };
 
 
+/*---------------*/
+/* 7.0 END QUIZ  */
+/*---------------*/
+
+// end quiz
+function endQuiz() {
+  console.log("in end quiz function!");
+
+  // hides the quiz question screen
+  quizQuestionEl.style.display = "none";
+  // displays the quiz end screen
+  quizEndEl.style.display = "block";
+  // displays final score in end screen 
+  finalScoreTextEl.textContent = "Your final score is: " + secondsLeft;
+  
+};
+
+
 /*----------------------------*/
-/* 7.0 PSEUDOCODE and TESTING */
+/* 8.0 PSEUDOCODE and TESTING */
 /*----------------------------*/
 
 /* 
@@ -233,42 +269,42 @@ function runQuiz(event) {
 ## the timer should
 #- decrement by one second
 #- decrement by ten seconds when a queston is wrong
-- stop when:
-  #-- it reaches zero
-  -- OR quiz is finished
-- end quiz when it stops
+#- stop when:
+  #-- it reaches or decrements below zero 
+  #-- OR all Qs answered 
 
 ## clicking a non-final question choice should:
 #- prevent default
 #- score the previous question
-  -- if the answer is correct:
+  #-- if the answer is correct:
     #--- set the currentQuestionStatus to correct
-    --- briefly display the previous question status 
+    #--- briefly display the previous question status 
     #--- (leave timer as-is)
-  -- if the answer is incorrect:
+  #-- if the answer is incorrect:
     #--- set the currentQuestionStatus to wrong 
-    --- briefly display the previous question status
+    #--- briefly display the previous question status
     #--- decrement timer by ten seconds
+    #--- zero out timer and end quiz if decrementing will make number negative
 #- increment the current question by 1
-- display the content of the next question
+#- display the content of the next question
 
 ## clicking the final question choice should
-- prevent default
-- hide the question screen
-- display the quiz end screen
-- score the previous question
-  -- if the answer is correct:
-    --- briefly display the previous question status
-    --- (leave timer as-is)
-    --- stop the timer
-    --- store the time remaining
-    --- display the time remaining as the score
-  -- if the answer is incorrect:
-    --- briefly display the previous question status
-    --- decrement the timer by ten seconds 
-    --- stop the timer
-    --- store the time remaining 
-    --- display the time remaining as the score
+#- prevent default
+#- score the previous question
+  #-- if the answer is correct:
+    #--- briefly display the previous question status
+    #--- (leave timer as-is)
+  #-- if the answer is incorrect:
+    #--- briefly display the previous question status
+    #--- decrement the timer by ten seconds 
+    #--- zero out timer and end quiz if decrementing will make number negative
+#- increment the current question by 1
+#- end the quiz
+
+## ending the quiz should
+#- hide the question screen
+#- display the quiz end screen
+#- display the time remaining as the score
 
 ## hitting the initials submit button should
 - check that the initials text input is not empty
