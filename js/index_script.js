@@ -2,13 +2,16 @@
 
 1.0 Globals
 2.0 Quiz Timer
-3.0 Start Quiz
+3.0 Run Quiz
 
 */
 
 /***************/
 /* 1.0 Globals */
 /***************/
+
+// create variable to track current question 
+var currentQuestion = 0;
 
 // access timer element by id
 var timeEl = document.querySelector("#time");
@@ -97,19 +100,32 @@ function setTime() {
 
 };
 
+/*************************/
+/* 3.0 Display Questions */
+/*************************/
+
+// write function to display question
+function displayQuestion() {
+  questionTextEl.textContent = questions[currentQuestion].text;
+  choice0Btn.textContent = questions[currentQuestion].choices[0];
+  choice1Btn.textContent = questions[currentQuestion].choices[1];
+  choice2Btn.textContent = questions[currentQuestion].choices[2];
+  choice3Btn.textContent = questions[currentQuestion].choices[3];
+};
+
 /******************/
-/* 3.0 Start Quiz */
+/* 4.0 Run Quiz */
 /******************/
 
 // add event listeners for quiz start button
-quizStartBtn.addEventListener("click", startQuiz);
+quizStartBtn.addEventListener("click", runQuiz);
 
-// start quiz
-function startQuiz(event) {
+// run quiz
+function runQuiz(event) {
   // prevent default
   event.preventDefault();
   console.log(event);
-  console.log("in startQuiz!");
+  console.log("in runQuiz function!");
 
   // start the timer
   setTime();
@@ -120,7 +136,6 @@ function startQuiz(event) {
   // display the quiz question screen
   quizQuestionEl.style.display = "block";
 
-  // TESTING: changing content of 0eth choice button
-  // choice0Btn.textContent = "HELLO THERE!"
-  
+  displayQuestion();
+
 };
