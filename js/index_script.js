@@ -1,23 +1,28 @@
-/* Table of Contents 
+/** TABLE OF CONTENTS
+  * 1.0 GLOBALS
+  * 2.0 EVENT LISTENERS
+  * 3.0 TIMER 
+  * 4.0 QUESTION DISPLAY 
+  * 5.0 QUESTION SCORING 
+  * 6.0 RUN QUIZ
+  * 7.0 PSEUDOCODE and TESTING
+**/
 
-1.0 Globals
-2.0 Quiz Timer
-3.0 Run Quiz
 
-*/
+/*-------------*/
+/* 1.0 GLOBALS */
+/*-------------*/
 
-/***************/
-/* 1.0 Globals */
-/***************/
-
-// create variable to track current question 
+// create variables to track current question, choice, answer, and status 
 var currentQuestion = 0;
+var choice; 
+var answer;
+var previousQuestionStatus;
 
 // access timer element by id
 var timeEl = document.querySelector("#time");
 // set timer starting point
 var secondsLeft = 5;
-
 // access quiz start button by id
 var quizStartBtn = document.querySelector("#quiz-start-btn");
 
@@ -27,7 +32,7 @@ var quizQuestionEl = document.querySelector("#quiz-question-screen");
 var quizEndEl = document.querySelector("#quiz-end-screen");
 var quizPrevQuesStatusEl = document.querySelector("#prev-question-status-screen");
 
-// access question components
+// access question text and choice elements 
 var questionTextEl = document.querySelector("#question-text");
 console.log(questionTextEl);
 var choice0Btn = document.querySelector("#choice-0eth-btn");
@@ -73,39 +78,54 @@ var questions = [
 // log questions
 console.log(questions);
 
-/******************/
-/* 2.0 Quiz Timer */
-/******************/
+/*---------------------*/
+/* 2.0 EVENT LISTENERS */
+/*---------------------*/
 
-// Start timer when when quiz start button is clicked
+// add event listener for quiz start button
+quizStartBtn.addEventListener("click", runQuiz);
+
+// add event listeners for choice buttons
+choice0Btn.addEventListener("click", scoreChoice);
+choice1Btn.addEventListener("click", scoreChoice) 
+choice2Btn.addEventListener("click", scoreChoice);
+choice3Btn.addEventListener("click", scoreChoice);
+
+
+/*-----------*/
+/* 3.0 TIMER */
+/*-----------*/
+
+// creates timer that decreases by one second and stops at zero
 function setTime() {
 
-  // Sets interval in variable 
+  // sets interval in variable 
   var timerInterval = setInterval(function() {
 
-    // Decrements seconds left by 1
+    // decrements seconds left by 1
     secondsLeft--;
-    // Displays seconds left
+    // displays seconds left
     timeEl.textContent = "Time: " + secondsLeft;
     console.log("Time left: " + secondsLeft);
 
-    // Stops timer at zero seconds
+    // stops timer at zero seconds
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
-      // Logs quiz over
-      console.log("Quiz over");
+      // logs quiz over when timer reaches zero
+      console.log("Timer has hit zero");
     }
 
   }, 1000);
 
 };
 
-/*************************/
-/* 3.0 Display Questions */
-/*************************/
+
+/*----------------------*/
+/* 4.0 QUESTION DISPLAY */
+/*----------------------*/
 
 // write function to display question
-function displayQuestion() {
+function displayCurrentQuestion() {
   questionTextEl.textContent = questions[currentQuestion].text;
   choice0Btn.textContent = questions[currentQuestion].choices[0];
   choice1Btn.textContent = questions[currentQuestion].choices[1];
@@ -113,29 +133,139 @@ function displayQuestion() {
   choice3Btn.textContent = questions[currentQuestion].choices[3];
 };
 
-/******************/
-/* 4.0 Run Quiz */
-/******************/
 
-// add event listeners for quiz start button
-quizStartBtn.addEventListener("click", runQuiz);
+/*----------------------*/
+/* 5.0 QUESTION SCORING */
+/*-----------------------*/
+
+// score the selected choice
+function scoreChoice (event) {
+
+  // prevent default
+  event.preventDefault();
+
+  // set choice to text of clicked choice button
+  choice = event.target.innerHTML; 
+  console.log("choice is: " + choice);
+  // set answer to text of current answer
+  answer = questions[currentQuestion].answer;
+  console.log("answer is: " + answer);
+
+  // test whether answer is correct
+  if (choice === answer) {
+    previousQuestionStatus = "correct";
+  } else {
+    previousQuestionStatus = "wrong";
+  }
+  console.log("previous question status is: " + previousQuestionStatus);
+};
+
+
+/*------------------*/
+/* 6.0 RUNNING QUIZ */
+/*------------------*/
 
 // run quiz
 function runQuiz(event) {
+
   // prevent default
   event.preventDefault();
-  console.log(event);
-  console.log("in runQuiz function!");
+  // console.log(event);
+  // console.log("in runQuiz function!");
 
   // start the timer
   setTime();
 
   // hide the quiz start screen
   quizStartEl.style.display = "none";
-
   // display the quiz question screen
   quizQuestionEl.style.display = "block";
 
-  displayQuestion();
+  // display the current question
+  displayCurrentQuestion();
 
 };
+
+
+/*----------------------------*/
+/* 7.0 PSEUDOCODE and TESTING */
+/*----------------------------*/
+
+/* 
+The following pseudocode details the features needed for a functioning application
+
+#---- quiz page -----#
+
+## clicking on the view high scores link should
+#- go to the highscores page
+
+## clicking quiz start button should
+#- prevent default
+#- start the timer
+#- hide the quiz start screen
+#- display the quiz question screen
+#- display the content of the first question
+
+## clicking a non-final question choice should:
+- prevent default
+- display the content of the next question
+- score the previous question
+  -- if the answer is correct:
+		--- briefly display the previous question status 
+    --- (leave timer as-is)
+  -- if the answer is incorrect:
+		--- briefly display the previous question status
+		--- decrement timer by ten seconds
+
+## clicking the final question choice should
+- prevent default
+- hide the question screen
+- display the quiz end screen
+- score the previous question
+  -- if the answer is correct:
+    --- briefly display the previous question status
+    --- (leave timer as-is)
+    --- stop the timer
+    --- store the time remaining
+    --- display the time remaining as the score
+  -- if the answer is incorrect:
+    --- briefly display the previous question status
+    --- decrement the timer by ten seconds 
+    --- stop the timer
+    --- store the time remaining 
+    --- display the time remaining as the score
+
+## the timer should
+- decrement by one second
+- decrement by ten seconds when a queston is wrong
+- stop when:
+	-- it reaches zero
+	-- OR quiz is finished
+- end quiz when it stops
+
+## hitting the initials submit button should
+- check that the initials text input is not empty
+  -- if the initials text input is empty:
+    --- display an alert
+    --- (do not save anything)
+  -- if the initials text input is non-empty:
+    --- save the initials such that they're associatied with the current score
+    --- go to the view highscores page
+
+#---- highscores page -----#
+
+## going to the highscores page should
+- display highscores page
+- dispay each locally stored score as an a list item
+- display the scores in descending order
+- display the ranking number next to each score
+
+## hitting the go back button should
+- leave the scores as-is
+- go back to the main quiz page
+
+## hitting the clear highscores button should
+- clear the scores from local storage
+- (stay on the current page)
+
+*/  
