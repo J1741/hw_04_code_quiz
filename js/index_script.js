@@ -144,9 +144,10 @@ function displayPreviousQuestionStatus() {
   }, 1500);
 };
 
-/*----------------------*/
-/* 5.0 QUESTION SCORING */
-/*-----------------------*/
+
+/*------------------*/
+/* 5.0 SCORE CHOICE */
+/*------------------*/
 
 // scores the selected choice
 function scoreChoice (event) {
@@ -181,6 +182,8 @@ function scoreChoice (event) {
   currentQuestion++;
   console.log("current question is now: " + currentQuestion);
 
+  // display next question after previous question answered
+  displayCurrentQuestion();
 };
 
 /*------------------*/

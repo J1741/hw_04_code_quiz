@@ -23,10 +23,18 @@
   display: none;
 }
 
+/* TESTING: hide previous question status by default */
 #prev-question-status-screen {
-  /* TESTING: hide previous question status by default */
   display: none;
   color: #6c757d;
   font-size: 1.25rem;
   font-style: italic;
+}
+
+/* make focused buttons look normal after prevent default */
+.btn:focus{
+  /* no shadow */
+  box-shadow:none !important;
+  /* same background color as un-focused */
+  background-color: #0d6efd !important;
 }
