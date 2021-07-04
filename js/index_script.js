@@ -22,7 +22,7 @@ var previousQuestionStatus;
 // access timer element by id
 var timeEl = document.querySelector("#time");
 // set timer starting point
-var secondsLeft = 5;
+var secondsLeft = 30;
 // access quiz start button by id
 var quizStartBtn = document.querySelector("#quiz-start-btn");
 
@@ -87,7 +87,7 @@ quizStartBtn.addEventListener("click", runQuiz);
 
 // add event listeners for choice buttons
 choice0Btn.addEventListener("click", scoreChoice);
-choice1Btn.addEventListener("click", scoreChoice) 
+choice1Btn.addEventListener("click", scoreChoice); 
 choice2Btn.addEventListener("click", scoreChoice);
 choice3Btn.addEventListener("click", scoreChoice);
 
@@ -124,7 +124,7 @@ function setTime() {
 /* 4.0 QUESTION DISPLAY */
 /*----------------------*/
 
-// write function to display question
+// displays current question
 function displayCurrentQuestion() {
   questionTextEl.textContent = questions[currentQuestion].text;
   choice0Btn.textContent = questions[currentQuestion].choices[0];
@@ -138,28 +138,39 @@ function displayCurrentQuestion() {
 /* 5.0 QUESTION SCORING */
 /*-----------------------*/
 
-// score the selected choice
+// scores the selected choice
 function scoreChoice (event) {
 
   // prevent default
   event.preventDefault();
 
-  // set choice to text of clicked choice button
+  // update choice to text of clicked button
   choice = event.target.innerHTML; 
   console.log("choice is: " + choice);
-  // set answer to text of current answer
+  // update answer to text of current question answer
   answer = questions[currentQuestion].answer;
   console.log("answer is: " + answer);
 
-  // test whether answer is correct
+  // test whether choice is correct
   if (choice === answer) {
+    // update previous question status
     previousQuestionStatus = "correct";
+    // increment current question number
   } else {
+    // update previous question status
     previousQuestionStatus = "wrong";
+    // decrement timer by ten seconds
+    secondsLeft -= 10;
   }
-  console.log("previous question status is: " + previousQuestionStatus);
-};
 
+  // log previous question status
+  console.log("previous question status is: " + previousQuestionStatus);
+
+  // increment current question number and log current question
+  currentQuestion++;
+  console.log("current question is now: " + currentQuestion);
+
+};
 
 /*------------------*/
 /* 6.0 RUNNING QUIZ */
@@ -192,7 +203,6 @@ function runQuiz(event) {
 /*----------------------------*/
 
 /* 
-The following pseudocode details the features needed for a functioning application
 
 #---- quiz page -----#
 
@@ -206,16 +216,27 @@ The following pseudocode details the features needed for a functioning applicati
 #- display the quiz question screen
 #- display the content of the first question
 
+## the timer should
+#- decrement by one second
+#- decrement by ten seconds when a queston is wrong
+- stop when:
+  #-- it reaches zero
+  -- OR quiz is finished
+- end quiz when it stops
+
 ## clicking a non-final question choice should:
-- prevent default
-- display the content of the next question
-- score the previous question
+#- prevent default
+#- score the previous question
   -- if the answer is correct:
-		--- briefly display the previous question status 
-    --- (leave timer as-is)
+    #--- set the currentQuestionStatus to correct
+    --- briefly display the previous question status 
+    #--- (leave timer as-is)
   -- if the answer is incorrect:
-		--- briefly display the previous question status
-		--- decrement timer by ten seconds
+    #--- set the currentQuestionStatus to wrong 
+    --- briefly display the previous question status
+    #--- decrement timer by ten seconds
+#- increment the current question by 1
+- display the content of the next question
 
 ## clicking the final question choice should
 - prevent default
@@ -234,14 +255,6 @@ The following pseudocode details the features needed for a functioning applicati
     --- stop the timer
     --- store the time remaining 
     --- display the time remaining as the score
-
-## the timer should
-- decrement by one second
-- decrement by ten seconds when a queston is wrong
-- stop when:
-	-- it reaches zero
-	-- OR quiz is finished
-- end quiz when it stops
 
 ## hitting the initials submit button should
 - check that the initials text input is not empty
