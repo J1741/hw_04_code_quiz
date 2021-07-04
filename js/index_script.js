@@ -34,7 +34,6 @@ var quizPrevQuesStatusEl = document.querySelector("#prev-question-status-screen"
 
 // access question text and choice elements 
 var questionTextEl = document.querySelector("#question-text");
-console.log(questionTextEl);
 var choice0Btn = document.querySelector("#choice-0eth-btn");
 var choice1Btn = document.querySelector("#choice-1eth-btn");
 var choice2Btn = document.querySelector("#choice-2eth-btn");
@@ -133,6 +132,17 @@ function displayCurrentQuestion() {
   choice3Btn.textContent = questions[currentQuestion].choices[3];
 };
 
+// briefly displays previous question status
+function displayPreviousQuestionStatus() {
+  // unhide previous question status screen
+  quizPrevQuesStatusEl.style.display = "block";
+  // populate previous question status
+  quizPrevQuesStatusEl.textContent = previousQuestionStatus;
+  // hide previous question status screen after 1.5 seconds
+  setTimeout(function() {
+    quizPrevQuesStatusEl.style.display = "none"; 
+  }, 1500);
+};
 
 /*----------------------*/
 /* 5.0 QUESTION SCORING */
@@ -154,18 +164,19 @@ function scoreChoice (event) {
   // test whether choice is correct
   if (choice === answer) {
     // update previous question status
-    previousQuestionStatus = "correct";
-    // increment current question number
+    previousQuestionStatus = "Correct!";
+    // briefly display previous question status screen
+    displayPreviousQuestionStatus();
   } else {
     // update previous question status
-    previousQuestionStatus = "wrong";
+    previousQuestionStatus = "Wrong!";
     // decrement timer by ten seconds
     secondsLeft -= 10;
+    displayPreviousQuestionStatus();
   }
 
   // log previous question status
   console.log("previous question status is: " + previousQuestionStatus);
-
   // increment current question number and log current question
   currentQuestion++;
   console.log("current question is now: " + currentQuestion);
